@@ -60,7 +60,7 @@ regd_users.delete('/auth/review/:isbn', (req, res) => {
     const isbn = req.params.isbn;
     if (books.hasOwnProperty(isbn)) {
         const username = req.session.authorization.username;
-        if (books[isbn].reviews.hasOwnProperty(username)) {
+        if (!books[isbn].reviews.hasOwnProperty(username)) {
             res.send(`Review of ${username} not found!`);
         } else {
             delete books[isbn].reviews[username];
